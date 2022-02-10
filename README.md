@@ -1,4 +1,4 @@
-# desafios-ballerini
+# Desafios - Ballerini
 
 Este repositório contém os desafios da Rafa Ballerini.
 Utilizo os desafios para testar meus conhecimentos e aprender coisas novas.
