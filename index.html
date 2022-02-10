@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Concert One' rel='stylesheet'>
+    <link rel="stylesheet" href="new.css">
+    <title>Desafio Extra</title>
+    <script>
+        function cadastrar(){
+            usuarios = [];
+
+            var name = document.getElementById("name");
+            var age = document.getElementById("age");
+            var skills = document.getElementById("skills");
+
+
+            if(name.value != "" && age.value != "" && skills.value != ""){
+
+
+                var pessoa = {
+                    name: name.value, age: age.value, skills: skills.value
+                }
+
+
+                if(localStorage.usuarios != null){
+                    usuarios = JSON.parse(localStorage.usuarios)
+                }
+
+                
+                usuarios.push(pessoa)
+
+                let usuarios_json = JSON.stringify(usuarios)
+                
+                localStorage.setItem('usuarios', usuarios_json)
+
+            } else{
+                alert("Por favor, preencha todos os dados!")
+            }
+        }
+
+
+        // quando os conteudos dom sao todos carregados, executa a função
+        window.addEventListener('DOMContentLoaded', (event) =>{
+            console.log("DOM fully loaded and parsed")           
+            if(!!localStorage.usuarios){
+                // pega a lista de usuarios que esta no local storage, armazenado em JSON
+                let usuarios = localStorage.usuarios;
+                
+                
+                usuarios = JSON.parse(usuarios); // transforma o JSON em um array novamente
+                // pega a div 'resultados'
+                const resultados = document.getElementById('resultados');
+
+                
+                // Esse loop serve para imprimir na tela todos os usuarios 
+                // que estão no array de usuarios           
+                for(var i = 0; i < usuarios.length; i++){ 
+                    
+                    // Seta o objeto Pessoa referente
+                    pessoa = usuarios[i];
+
+                    // Dados da pessoa
+                    nome = pessoa.name;
+                    idade = pessoa.age;
+                    skills = pessoa.skills;
+                    
+                    // define o conteudo que irá ser impresso na tela
+                    textNome = "<p class='campo'>Nome: </p><p class='dados'>" + nome 
+                        + "</p><br/><p class='campo'>Idade: </p><p class='dados'>" 
+                        + idade + "</p><br><p class='campo'>Skills: </p><p class='dados'>" 
+                            + skills + "</p><br><br></p>";
+                    
+
+                    // cria uma div para cada pessoa
+                    let div = document.createElement('div');
+                    div.setAttribute('id', 'pessoa' + i);
+
+                    // coloca a div dentro da div resultados
+                    resultados.appendChild(div);
+
+                    let pessDiv = document.getElementById('pessoa' + i);
+
+                    pessDiv.innerHTML = textNome;
+
+
+
+                    // // cria um paragrafo pra cada dado
+                    // let itemNome = document.createElement("p");
+                    // let itemIdade = document.createElement("p");
+                    // let itemSkills = document.createElement("p");
+
+                    // // adiciona na tag o conteudo criado
+                    // itemNome.textContent = textNome;
+                    // itemIdade.textContent = textIdade;
+                    // itemSkills.textContent = textSkills;
+
+                    // // adiciona cada um dos paragrafos dentro da div
+                    // div.append(itemNome);
+                    // div.append(itemIdade);
+                    // div.append(itemSkills);
+                }
+                
+            }
+        });
+
+        
+        
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Desafio extra</h1>
+        <div class="content">
+            <section class="flex">
+                <div class="column  input-column">
+                    <h2>Digite os dados do usuario</h2>
+                    <form name="cadastro" method="post">
+                        <div>
+                            <label>Nome</label>
+                            <input type="text" name="name" id="name">
+                        </div>
+                        <div>
+                            <label>Idade</label>
+                            <input type="text" name="age" id="age">
+                        </div>
+                        <div>
+                            <label>Skills</label>
+                            <input type="text" name="skills" id="skills">
+                        </div>
+                        <div>
+                            <br>
+                            <button name="btnCadastrar" onclick="cadastrar();">Cadastrar usuario</button>
+                            <br><br>
+                        </div>
+                    </form>
+                </div>
+                <div class="column">
+                    <h2>Resultado:</h2>
+                    <div id="resultados">
+                    </div>
+                </div>
+               
+            </section>
+        </div>
+    </div>
+
+</body>
+</html>
