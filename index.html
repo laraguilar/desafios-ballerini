@@ -9,6 +9,7 @@
     <title>Desafio Extra</title>
     <script>
         function cadastrar(){
+
             usuarios = [];
 
             var name = document.getElementById("name");
@@ -41,9 +42,10 @@
         }
 
 
-        // quando os conteudos dom sao todos carregados, executa a função
+        // quando os conteudos dom sao todos carregados, executa a função para
+        // imprimir os dados na tela
         window.addEventListener('DOMContentLoaded', (event) =>{
-            console.log("DOM fully loaded and parsed")           
+            //console.log("DOM fully loaded and parsed")           
             if(!!localStorage.usuarios){
                 // pega a lista de usuarios que esta no local storage, armazenado em JSON
                 let usuarios = localStorage.usuarios;
@@ -116,7 +118,7 @@
             <section class="flex">
                 <div class="column  input-column">
                     <h2>Digite os dados do usuario</h2>
-                    <form name="cadastro" method="post">
+                    <form name="cadastro">
                         <div>
                             <label>Nome</label>
                             <input type="text" name="name" id="name">
